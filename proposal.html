@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Hii Babyyy!!!!❤️</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(to right, #ff758c, #ff7eb3);
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+}
+
+/* Floating hearts */
+.heart {
+    position: absolute;
+    color: pink;
+    font-size: 22px;
+    animation: float 6s linear infinite;
+}
+
+@keyframes float {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-800px); opacity: 0; }
+}
+
+.container {
+    text-align: center;
+    color: white;
+    margin-top: 40px;
+}
+
+h1 { font-size: 40px; }
+
+/* Envelope layout */
+.envelopes {
+    display: flex;
+    justify-content: center;
+    gap: 120px;
+    margin-top: 100px;
+}
+
+.envelope {
+    width: 180px;
+    height: 120px;
+    background: white;
+    border-radius: 12px;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    overflow: hidden;
+}
+
+/* Flap */
+.flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ff4d6d;
+    clip-path: polygon(0 0, 50% 60%, 100% 0);
+    transform-origin: top;
+    transition: transform 0.6s ease;
+}
+
+/* Letter inside envelope */
+.paper {
+    position: absolute;
+    bottom: -100%;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    text-align: center;
+    padding-top: 40px;
+    transition: bottom 0.6s ease;
+    font-size: 18px;
+}
+
+/* Open state */
+.envelope.open .flap {
+    transform: rotateX(180deg);
+}
+
+.envelope.open .paper {
+    bottom: 0;
+}
+
+/* Popups */
+.popup {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    justify-content: center;
+    align-items: center;
+}
+
+.box {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    width: 340px;
+    text-align: center;
+}
+
+/* Album */
+.album img {
+    width: 100%;
+    border-radius: 15px;
+}
+
+/* Buttons */
+button {
+    padding: 10px 20px;
+    background: #ff4d6d;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    margin: 10px;
+    cursor: pointer;
+}
+
+textarea {
+    width: 100%;
+    height: 170px;
+    border-radius: 12px;
+    padding: 10px;
+    border: none;
+    resize: none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Hii Babyyy!!!!</h1>
+    <p>Love you B!❤️💌 This isnt much but just wanted something new and different💖
+</p>
+
+    <div class="envelopes">
+        <div class="envelope" onclick="openAlbum(this)">
+            <div class="flap"></div>
+            <div class="paper">💖</div>
+        </div>
+
+        <div class="envelope" onclick="openLetter(this)">
+            <div class="flap"></div>
+            <div class="paper">💌</div>
+        </div>
+    </div>
+</div>
+
+<!-- Album Popup -->
+<div class="popup" id="album">
+    <div class="box">
+        <p id="caption" style="color:#ff4d6d; font-weight:bold; margin-bottom:10px;">
+            Our very first memory together 💕
+        </p>
+
+        <div class="album">
+            <img id="albumImg" src="1.jpg">
+        </div>
+
+        <button onclick="nextPhoto()">Next ➜</button>
+        <button onclick="closeAlbum()">Close</button>
+    </div>
+</div>
+
+<!-- Letter Popup -->
+<div class="popup" id="letter">
+    <div class="box">
+        <h3>My Letter For You 💌</h3>
+        <textarea readonly>
+Hii Bbbb❤️
+
+From the moment you came into my life, everything started feeling a little brighter, a little warmer, less heavier and a lot more meaningful. You are my comfort, my smile after a long day, and the person I want beside me in every little moment. You have become a part of my live with or without you knowing it. You are the calm to my storm, the sugar to my coffee and the light to my dark. This might be dramatic but deep down you mean a lot to me, you mean so much that even words arent enough to express them. I love you to the sun and beyond.
+
+So today, on this special day, I just have something simple but very important question to ask…
+
+Will you hold my hand without leaving it at any situation, laughing for my silly stuffs, fighting for us, and loving me — today, tomorrow, and until our last breadths?
+
+
+Will you be mine forever? 💍❤️
+*PLEASE SAY YESS!!!!*
+~ Harini 💘✨💖
+        </textarea>
+        <button onclick="closeLetter()">Close</button>
+    </div>
+</div>
+
+<audio id="music" src="music.mp3"></audio>
+
+<script>
+let photos = [
+  {img:"1.jpg", text:"You belong with me 💕"},
+  {img:"2.jpg", text:"You make my world brighter 🌸"},
+  {img:"3.jpg", text:"Smiles that mean everything 😍"},
+  {img:"4.jpg", text:"Every moment with you is magic ✨"},
+  {img:"5.jpg", text:"Forever feels right with you 💖"},
+  {img:"6.jpg", text:"You are my happy place 🥰"},
+  {img:"7.jpg", text:"Love looks so beautiful on us 💑"},
+  {img:"8.jpg", text:"Captured pieces of my heart 📸"},
+  {img:"9.jpg", text:"With you, everything is perfect 💕"},
+  {img:"10.jpg", text:"You are my favorite person 💞"},
+];
+let index = 0;
+
+function openAlbum(env){
+    env.classList.add("open");
+    document.getElementById("music").play();
+    setTimeout(()=>{
+        document.getElementById("album").style.display="flex";
+    },600);
+}
+
+function openLetter(env){
+    env.classList.add("open");
+    setTimeout(()=>{
+        document.getElementById("letter").style.display="flex";
+    },600);
+}
+
+function closeAlbum(){
+    document.getElementById("album").style.display="none";
+}
+
+function closeLetter(){
+    document.getElementById("letter").style.display="none";
+}
+
+function nextPhoto(){
+    index = (index + 1) % photos.length;
+    document.getElementById("albumImg").src = photos[index].img;
+    document.getElementById("caption").innerText = photos[index].text;
+}
+
+/* Floating hearts */
+setInterval(()=>{
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="❤️";
+    h.style.left=Math.random()*100+"vw";
+    h.style.top="100vh";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),6000);
+},300);
+</script>
+
+</body>
+</html>
+
